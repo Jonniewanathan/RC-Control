@@ -35,10 +35,10 @@
     });
 
     socket.on('video', function (data) { //get button status from client
-        console.log(data.data)
+        console.log(data)
         let canvas = document.getElementById('canvas');
         let video  = document.getElementById('video');
-        canvas.setAttribute('src', data.data)
+        video.setAttribute('src', data)
     });
     function changeValue(number) {
         if(number === 0){
