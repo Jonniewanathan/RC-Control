@@ -1,5 +1,5 @@
 let NodeWebcam = require( "node-webcam" );
-let io = require('socket.io')(8080);
+let io = require('socket.io')(80);
 
 let opts = {
     callbackReturn: "base64"
