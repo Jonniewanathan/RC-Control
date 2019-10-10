@@ -36,21 +36,9 @@
     });
 
     socket.on('video', function (data) { //get button status from client
-        document.getElementById("video").src = data; //change checkbox according to push button on Raspberry Pi
-        socket.emit("light", data); //send push button status to back to server
         let canvas = document.getElementById('canvas');
-        let ctx    = canvas.getContext('2d');
         let video  = document.getElementById('video');
-
-        video.addEventListener('play', function () {
-            let $this = this;
-            (function loop() {
-                if (!$this.paused && !$this.ended) {
-                    ctx.drawImage(this, 0, 0);
-                    setTimeout(loop, 1000 / 30); // drawing at 30fps
-                }
-            })();
-        }, 0);
+        video.setAttribute('src', data)
     });
     function changeValue(number) {
         if(number === 0){
