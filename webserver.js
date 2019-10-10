@@ -22,7 +22,7 @@ function handler (req, res) { //create server
 }
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
-    let initialvalueleft = 1; //static variable for current status
+    let initialvalueleft = 0; //static variable for current status
     socket.on('light', function(data) { //get light switch status from client
         initialvalueleft = data;
         if (initialvalueleft != left.readSync()) { //only change LED if status has changed
