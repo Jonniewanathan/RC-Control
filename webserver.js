@@ -39,7 +39,7 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
         if (initialvalueright != right.readSync()) {
             right.writeSync(initialvalueright);
         }
-        if (initialvaluerforward != forward.readSync()) {
+        if (initialvalueforward != forward.readSync()) {
             forward.writeSync(initialvalueforward);
         }
         if (initialvaluereverse != reverse.readSync()) {
