@@ -19,6 +19,7 @@ function handler (req, res) { //create server
         res.write(data); //write data from index.html
         return res.end();
     });
+}
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
     let initialvalueleft = 1; //static variable for current status
