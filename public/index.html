@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
 <script>
     let socket = io(); //load socket.io-client and connect to the host that serves the page
+    let socketvideo = io(9090);
     let value = {right:1 , left:1, forward: 1, reverse: 1};
     window.addEventListener("load", function(){ //when page loads
         let left = document.getElementById("left");
