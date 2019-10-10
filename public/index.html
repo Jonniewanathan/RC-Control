@@ -11,16 +11,24 @@
     window.addEventListener("load", function(){ //when page loads
         let left = document.getElementById("left");
         left.addEventListener("click", function() { //add event listener for when checkbox changes
-            console.log(this)
-            value.left = Number(this.checked);
+            console.log(this);
+            value.left = changeValue(value.left);
             socket.emit("movement", value); //send button status to server (as 1 or 0)
         });
         let right = document.getElementById("right");
         right.addEventListener("change", function() { //add event listener for when checkbox changes
-            value.right = Number(this.checked);
+            value.right = changeValue(value.right);
             socket.emit("movement", value); //send button status to server (as 1 or 0)
         });
     });
+    function changeValue(number) {
+        if(number === 0){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
     // socket.on('left', function (data) { //get button status from client
     //     document.getElementById("left").checked = data; //change checkbox according to push button on Raspberry Pi
     //     socket.emit("left", data); //send push button status to back to server
