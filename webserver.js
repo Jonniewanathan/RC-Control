@@ -2,7 +2,7 @@ let http = require('http').createServer(handler); //require http server, and cre
 let fs = require('fs'); //require filesystem module
 let io = require('socket.io')(http) //require socket.io module and pass the http object (server)
 let Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-var v4l2camera = require("v4l2camera");
+let NodeWebcam = require( "node-webcam" );
 let left = new Gpio(23, 'out');
 let right = new Gpio(27, 'out');
 let forward = new Gpio(17, 'out');
@@ -49,16 +49,40 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
     });
     let socket = io();
 
-
-    let cam = new v4l2camera.Camera("/dev/video0");
-    if (cam.configGet().formatName !== "MJPG") {
-        console.log("NOTICE: MJPG camera required");
-        process.exit(1);
-    }
-    cam.configSet({width: 352, height: 288});
-    cam.start();
-    cam.capture(function loop() {
-        cam.capture(loop);
+//Default options
+    let opts = {
+        //Picture related
+        width: 1280,
+        height: 720,
+        quality: 100,
+        //Delay in seconds to take shot
+        //if the platform supports miliseconds
+        //use a float (0.1)
+        //Currently only on windows
+        delay: 0,
+        //Save shots in memory
+        saveShots: false,
+        // [jpeg, png] support varies
+        // Webcam.OutputTypes
+        output: "jpeg",
+        //Which camera to use
+        //Use Webcam.list() for results
+        //false for default device
+        device: false;
+        // [location, buffer, base64]
+        // Webcam.CallbackReturnTypes
+        callbackReturn: "location",
+        //Logging
+        verbose: false
+    };
+//Also available for quick use
+    NodeWebcam.capture("test_picture", opts, function(err, data) {
+    });
+//Return type with base 64 image
+    let opts = {
+        callbackReturn: "base64"
+    };
+    NodeWebcam.capture("test_picture", opts, function(err, data) {
         socket.emit("video", cam.toRGB());
     });
 });
