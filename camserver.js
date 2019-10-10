@@ -1,4 +1,3 @@
-let http = require('http')
 let NodeWebcam = require( "node-webcam" );
 let io = require('socket.io')(9090,{
     path: '/',
@@ -8,8 +7,6 @@ let io = require('socket.io')(9090,{
         pingTimeout: 5000,
         cookie: false
 });
-
-http.listen(9090);
 
 let opts = {
     callbackReturn: "base64"
