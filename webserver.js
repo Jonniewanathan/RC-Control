@@ -2,10 +2,10 @@ let http = require('http').createServer(handler); //require http server, and cre
 let fs = require('fs'); //require filesystem module
 let io = require('socket.io')(http) //require socket.io module and pass the http object (server)
 let Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-let left = new Gpio(23, 'out'); //use GPIO pin 4 as output
-let right = new Gpio(27, 'out'); //use GPIO pin 4 as output
-// let forward = new Gpio(17, 'out'); //use GPIO pin 4 as output
-// let reverse = new Gpio(22, 'out'); //use GPIO pin 4 as output
+let left = new Gpio(23, 'out');
+let right = new Gpio(27, 'out');
+let forward = new Gpio(17, 'out');
+let reverse = new Gpio(22, 'out');
 
 http.listen(8080); //listen to port 8080
 
@@ -24,15 +24,25 @@ function handler (req, res) { //create server
 io.sockets.on('connection', function (socket) {// WebSocket Connection
     let initialvalueleft = 1; //static variable for current status
     let initialvalueright = 1;
-    socket.on('movement', function(data) { //get light switch status from client
+    let initialvalueforward = 1;
+    let initialvaluereverse = 1;
+    socket.on('movement', function(data) {
         console.log(data)
         initialvalueleft = data.left;
         initialvalueright = data.right;
-        if (initialvalueleft != left.readSync()) { //only change LED if status has changed
-            left.writeSync(initialvalueleft); //turn LED on or off
+        initialvalueforward = data.forward;
+        initialvaluereverse = date.reverse;
+        if (initialvalueleft != left.readSync()) {
+            left.writeSync(initialvalueleft);
         }
-        if (initialvalueright != right.readSync()) { //only change LED if status has changed
-            right.writeSync(initialvalueright); //turn LED on or off
+        if (initialvalueright != right.readSync()) {
+            right.writeSync(initialvalueright);
+        }
+        if (initialvalueright != forward.readSync()) {
+            forward.writeSync(initialvalueforward);
+        }
+        if (initialvalueright != reverse.readSync()) {
+            reverse.writeSync(initialvaluereverse);
         }
     });
 });
