@@ -19,11 +19,6 @@ function handler (req, res) { //create server
         res.write(data); //write data from index.html
         return res.end();
     });
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
     let initialvalueleft = 1; //static variable for current status
@@ -36,23 +31,18 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
         initialvalueright = data.right;
         initialvalueforward = data.forward;
         initialvaluereverse = data.reverse;
+
         if (initialvalueleft != left.readSync()) {
             left.writeSync(initialvalueleft);
         }
         if (initialvalueright != right.readSync()) {
             right.writeSync(initialvalueright);
         }
-        if (initialvalueright != forward.readSync()) {
-            right.writeSync(0);
+        if (initialvaluerforward != forward.readSync()) {
             forward.writeSync(initialvalueforward);
-            sleep(500)
-            right.writeSync(initialvalueright);
         }
-        if (initialvalueright != reverse.readSync()) {
-            right.writeSync(0);
+        if (initialvaluereverse != reverse.readSync()) {
             reverse.writeSync(initialvaluereverse);
-            sleep(500)
-            right.writeSync(initialvalueright);
         }
     });
 });
