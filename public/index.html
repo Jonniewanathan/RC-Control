@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
 <script>
     let socket = io();
-    let socketvideo = io('http://localhost:9090');
+    let socketvideo = io('http://localhost:9090', { forceNew: true });
     let value = {right:1 , left:1, forward: 1, reverse: 1};
     window.addEventListener("load", function(){ //when page loads
         let left = document.getElementById("left");
