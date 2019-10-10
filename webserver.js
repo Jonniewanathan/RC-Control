@@ -2,6 +2,8 @@ let http = require('http').createServer(handler); //require http server, and cre
 let fs = require('fs'); //require filesystem module
 let io = require('socket.io')(http) //require socket.io module and pass the http object (server)
 let Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
+let raspividStream = require('raspivid-stream');
+let stream = raspividStream();
 let left = new Gpio(23, 'out');
 let right = new Gpio(27, 'out');
 let forward = new Gpio(17, 'out');
@@ -20,6 +22,10 @@ function handler (req, res) { //create server
         return res.end();
     });
 }
+
+videoStream.on('data', (data) => {
+    ws.send(data, { binary: true }, (error) => { if (error) console.error(error); });
+});
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
     let initialvalueleft = 1; //static variable for current status
