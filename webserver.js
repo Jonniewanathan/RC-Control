@@ -25,11 +25,12 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
     let initialvalueleft = 1; //static variable for current status
     let initialvalueright = 1;
     socket.on('movement', function(data) { //get light switch status from client
+        console.log(data)
         initialvalueleft = data.left;
+        initialvalueright = data.right;
         if (initialvalueleft != left.readSync()) { //only change LED if status has changed
             left.writeSync(initialvalueleft); //turn LED on or off
         }
-        initialvalueright = data.right;
         if (initialvalueright != right.readSync()) { //only change LED if status has changed
             right.writeSync(initialvalueright); //turn LED on or off
         }
