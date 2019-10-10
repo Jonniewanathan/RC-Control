@@ -6,6 +6,6 @@ let opts = {
 };
 io.on('connection', function (socket) {
     NodeWebcam.capture("test_picture", opts, function (err, data) {
-        io.broadcast.emit("video", data);
+        socket.emit("video", data);
     });
 })
