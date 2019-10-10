@@ -28,6 +28,7 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
     };
     NodeWebcam.capture("test_picture", opts, function(err, data) {
         socket.emit("video", data);
+        cosole.log(data);
     });
     let initialvalueleft = 1; //static variable for current status
     let initialvalueright = 1;
