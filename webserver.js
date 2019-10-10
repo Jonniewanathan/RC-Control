@@ -4,8 +4,8 @@ let io = require('socket.io')(http) //require socket.io module and pass the http
 let Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
 let left = new Gpio(23, 'out'); //use GPIO pin 4 as output
 let right = new Gpio(27, 'out'); //use GPIO pin 4 as output
-let forward = new Gpio(17, 'out'); //use GPIO pin 4 as output
-let reverse = new Gpio(22, 'out'); //use GPIO pin 4 as output
+// let forward = new Gpio(17, 'out'); //use GPIO pin 4 as output
+// let reverse = new Gpio(22, 'out'); //use GPIO pin 4 as output
 
 http.listen(8080); //listen to port 8080
 
@@ -23,17 +23,17 @@ function handler (req, res) { //create server
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
     let initialvalueleft = 0; //static variable for current status
-    socket.on('light', function(data) { //get light switch status from client
+    let initialvalueright = 0;
+    socket.on('left', function(data) { //get light switch status from client
         initialvalueleft = data;
         if (initialvalueleft != left.readSync()) { //only change LED if status has changed
             left.writeSync(initialvalueleft); //turn LED on or off
         }
     });
-});
-
-process.on('SIGINT', function () { //on ctrl+c
-    LED.writeSync(0); // Turn LED off
-    LED.unexport(); // Unexport LED GPIO to free resources
-    pushButton.unexport(); // Unexport Button GPIO to free resources
-    process.exit(); //exit completely
+    socket.on('right', function(data) { //get light switch status from client
+        initialvalueright = data;
+        if (initialvalueright != right.readSync()) { //only change LED if status has changed
+            right.writeSync(initialvalueright); //turn LED on or off
+        }
+    });
 });

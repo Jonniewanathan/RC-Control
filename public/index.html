@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1>Control LED light</h1>
-<p><input type="checkbox" id="light"></p>
+<h1>RC-Control</h1>
+<p><input type="checkbox" id="left"></p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
 <script>
     let socket = io(); //load socket.io-client and connect to the host that serves the page
@@ -11,10 +11,18 @@
         left.addEventListener("change", function() { //add event listener for when checkbox changes
             socket.emit("left", Number(this.checked)); //send button status to server (as 1 or 0)
         });
+        let right = document.getElementById("right");
+        right.addEventListener("change", function() { //add event listener for when checkbox changes
+            socket.emit("right", Number(this.checked)); //send button status to server (as 1 or 0)
+        });
     });
     socket.on('left', function (data) { //get button status from client
         document.getElementById("left").checked = data; //change checkbox according to push button on Raspberry Pi
         socket.emit("left", data); //send push button status to back to server
+    });
+    socket.on('right', function (data) { //get button status from client
+        document.getElementById("right").checked = data; //change checkbox according to push button on Raspberry Pi
+        socket.emit("right", data); //send push button status to back to server
     });
 </script>
 </html>
