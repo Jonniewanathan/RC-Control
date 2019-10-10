@@ -2,15 +2,6 @@ let http = require('http').createServer(handler); //require http server, and cre
 let fs = require('fs'); //require filesystem module
 let io = require('socket.io')(http) //require socket.io module and pass the http object (server)
 let NodeWebcam = require( "node-webcam" );
-let io = require('socket.io')(9090,{
-    path: '/',
-        serveClient: false,
-        // below are engine.IO options
-        pingInterval: 10000,
-        pingTimeout: 5000,
-        cookie: false
-});
-
 
 http.listen(9090); //listen to port 8080
 
