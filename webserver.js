@@ -21,6 +21,10 @@ function handler (req, res) { //create server
     });
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 io.sockets.on('connection', function (socket) {// WebSocket Connection
     let initialvalueleft = 1; //static variable for current status
     let initialvalueright = 1;
@@ -39,13 +43,15 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
             right.writeSync(initialvalueright);
         }
         if (initialvalueright != forward.readSync()) {
-            forward.writeSync(initialvalueforward);
             right.writeSync(0);
+            forward.writeSync(initialvalueforward);
+            sleep(500)
             right.writeSync(initialvalueright);
         }
         if (initialvalueright != reverse.readSync()) {
-            reverse.writeSync(initialvaluereverse);
             right.writeSync(0);
+            reverse.writeSync(initialvaluereverse);
+            sleep(500)
             right.writeSync(initialvalueright);
         }
     });
