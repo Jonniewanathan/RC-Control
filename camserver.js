@@ -27,10 +27,10 @@ io.sockets.on('connection', function (socket) {
         socket.emit("video", data);
     });
     while(true){
+        sleep(1000);
         NodeWebcam.capture("test_picture", opts, function (err, data) {
             socket.emit("video", data);
         });
-        sleep(1000);
     }
 })
 
