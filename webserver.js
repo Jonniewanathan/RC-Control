@@ -2,8 +2,7 @@ let http = require('http').createServer(handler); //require http server, and cre
 let fs = require('fs'); //require filesystem module
 let io = require('socket.io')(http) //require socket.io module and pass the http object (server)
 let Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-let raspividStream = require('raspivid-stream');
-let videoStream = raspividStream();
+var v4l2camera = require("v4l2camera");
 let left = new Gpio(23, 'out');
 let right = new Gpio(27, 'out');
 let forward = new Gpio(17, 'out');
@@ -22,10 +21,6 @@ function handler (req, res) { //create server
         return res.end();
     });
 }
-
-videoStream.on('data', (data) => {
-    ws.send(data, { binary: true }, (error) => { if (error) console.error(error); });
-});
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
     let initialvalueleft = 1; //static variable for current status
@@ -51,5 +46,20 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
         if (initialvaluereverse != reverse.readSync()) {
             reverse.writeSync(initialvaluereverse);
         }
+    });
+    let socket = io();
+
+
+    let cam = new v4l2camera.Camera("/dev/video0");
+    if (cam.configGet().formatName !== "MJPG") {
+        console.log("NOTICE: MJPG camera required");
+        process.exit(1);
+    }
+    cam.configSet({width: 352, height: 288});
+    cam.start();
+    cam.capture(function loop() {
+        cam.capture(loop);
+        socket.emit("video", cam.toRGB());
+        });
     });
 });

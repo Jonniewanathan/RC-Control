@@ -14,6 +14,7 @@
     "socket.io": "^2.3.0"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "raspivid-stream": "^0.2.1"
   }
 }
