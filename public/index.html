@@ -7,14 +7,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
 <script>
     let socket = io(); //load socket.io-client and connect to the host that serves the page
+    let value;
     window.addEventListener("load", function(){ //when page loads
         let left = document.getElementById("left");
         left.addEventListener("change", function() { //add event listener for when checkbox changes
-            socket.emit("left", Number(this.checked)); //send button status to server (as 1 or 0)
+            value.left = Number(this.checked)
+            socket.emit("movement", value); //send button status to server (as 1 or 0)
         });
         let right = document.getElementById("right");
         right.addEventListener("change", function() { //add event listener for when checkbox changes
-            socket.emit("right", Number(this.checked)); //send button status to server (as 1 or 0)
+            value.right = Number(this.checked)
+            socket.emit("movement", value); //send button status to server (as 1 or 0)
         });
     });
     // socket.on('left', function (data) { //get button status from client
