@@ -6,7 +6,9 @@
 <p>RIGHT: <button type="button" id="right">RIGHT</button></p>
 <p>FORWARD: <button type="button" id="forward">FORWARD</button></p>
 <p>REVERSE: <button type="button" id="reverse">REVERSE</button></p>
-<video width="640" height="480" id="video"></video>
+<video width="640" height="480" id="video">
+    <source id="source" src="">
+</video>
 <canvas id="canvas"></canvas>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
 <script>
@@ -39,7 +41,9 @@
         console.log(data)
         let canvas = document.getElementById('canvas');
         let video  = document.getElementById('video');
-        video.setAttribute('src', data)
+        let source = document.getElementById('source');
+        source.setAttribute('src', data);
+        video.play();
     });
     function changeValue(number) {
         if(number === 0){
