@@ -68,7 +68,7 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
         //Which camera to use
         //Use Webcam.list() for results
         //false for default device
-        device: false;
+        device: false,
         // [location, buffer, base64]
         // Webcam.CallbackReturnTypes
         callbackReturn: "location",
