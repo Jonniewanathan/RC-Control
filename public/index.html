@@ -38,16 +38,11 @@
         });
     });
 
-    socket.on('video', function (data) { //get button status from client
-        console.log(data)
-        let canvas = document.getElementById('canvas');
-        let video  = document.getElementById('video');
-        let source = document.getElementById('source');
+    socket.on('video', function (data) {
         let image = document.getElementById('image');
         image.setAttribute('src', data);
-        source.setAttribute('src', data);
-        video.play();
     });
+
     function changeValue(number) {
         if(number === 0){
             return 1;

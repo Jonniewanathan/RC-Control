@@ -22,14 +22,19 @@ function handler (req, res) { //create server
     });
 }
 
-io.sockets.on('connection', function (socket) {// WebSocket Connection
-    let opts = {
-        callbackReturn: "base64"
-    };
+
+
+let opts = {
+    callbackReturn: "base64"
+};
+while(true){
     NodeWebcam.capture("test_picture", opts, function(err, data) {
         socket.emit("video", data);
-        console.log(data);
     });
+}
+
+
+io.sockets.on('connection', function (socket) {// WebSocket Connection
     let initialvalueleft = 1; //static variable for current status
     let initialvalueright = 1;
     let initialvalueforward = 1;
