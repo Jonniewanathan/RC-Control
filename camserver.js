@@ -1,8 +1,11 @@
-let NodeWebcam = require( "node-webcam" );
-let io = require('socket.io');
 let http = require('http')
+let NodeWebcam = require( "node-webcam" );
+let io = require('socket.io')(http);
+
 let server = http.createServer();
+
 server.listen(9090, "http://localhost/");
+
 let socket = io.listen(server);
 
 let opts = {
