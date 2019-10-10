@@ -2,22 +2,33 @@
 <html>
 <body>
 <h1>RC-Control</h1>
-<p>LEFT: <input type="button" id="left"></p>
-<p>RIGHT: <input type="button" id="right"></p>
+<p>LEFT: <button type="button" id="left">LEFT</button></p>
+<p>RIGHT: <button type="button" id="right">RIGHT</button></p>
+<p>FORWARD: <button type="button" id="forward">FORWARD</button></p>
+<p>REVERSE: <button type="button" id="reverse">REVERSE</button></p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
 <script>
     let socket = io(); //load socket.io-client and connect to the host that serves the page
-    let value = {right:0 , left:0};
+    let value = {right:1 , left:1, forward: 1, reverse: 1};
     window.addEventListener("load", function(){ //when page loads
         let left = document.getElementById("left");
+        let right = document.getElementById("right");
+        let forward = document.getElementById("forward");
+        let reverse = document.getElementById("reverse");
         left.addEventListener("click", function() { //add event listener for when checkbox changes
-            console.log(this);
             value.left = changeValue(value.left);
             socket.emit("movement", value); //send button status to server (as 1 or 0)
         });
-        let right = document.getElementById("right");
         right.addEventListener("click", function() { //add event listener for when checkbox changes
             value.right = changeValue(value.right);
+            socket.emit("movement", value); //send button status to server (as 1 or 0)
+        });
+        forward.addEventListener("click", function() { //add event listener for when checkbox changes
+            value.forward = changeValue(value.forward);
+            socket.emit("movement", value); //send button status to server (as 1 or 0)
+        });
+        reverse.addEventListener("click", function() { //add event listener for when checkbox changes
+            value.reverse = changeValue(value.reverse);
             socket.emit("movement", value); //send button status to server (as 1 or 0)
         });
     });
