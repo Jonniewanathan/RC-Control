@@ -22,13 +22,6 @@ function handler (req, res) { //create server
     });
 }
 
-let opts = {
-    callbackReturn: "base64"
-};
-NodeWebcam.capture("test_picture", opts, function(err, data) {
-    socket.emit("video", data);
-});
-
 io.sockets.on('connection', function (socket) {// WebSocket Connection
     let initialvalueleft = 1; //static variable for current status
     let initialvalueright = 1;
