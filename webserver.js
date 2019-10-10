@@ -23,6 +23,12 @@ function handler (req, res) { //create server
 }
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
+    let opts = {
+        callbackReturn: "base64"
+    };
+    NodeWebcam.capture("test_picture", opts, function(err, data) {
+        socket.emit("video", data);
+    });
     let initialvalueleft = 1; //static variable for current status
     let initialvalueright = 1;
     let initialvalueforward = 1;
@@ -49,7 +55,7 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
     });
 });
 
-let socket = io();
+
 //Default options
 // let opts = {
 //     //Picture related
@@ -80,9 +86,3 @@ let socket = io();
 // NodeWebcam.capture("test_picture", opts, function(err, data) {
 // });
 //Return type with base 64 image
-let opts = {
-    callbackReturn: "base64"
-};
-NodeWebcam.capture("test_picture", opts, function(err, data) {
-    socket.emit("video", cam.toRGB());
-});
