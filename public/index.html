@@ -16,7 +16,7 @@
             socket.emit("movement", value); //send button status to server (as 1 or 0)
         });
         let right = document.getElementById("right");
-        right.addEventListener("change", function() { //add event listener for when checkbox changes
+        right.addEventListener("click", function() { //add event listener for when checkbox changes
             value.right = changeValue(value.right);
             socket.emit("movement", value); //send button status to server (as 1 or 0)
         });
