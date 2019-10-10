@@ -38,7 +38,7 @@
     socket.on('video', function (data) { //get button status from client
         let canvas = document.getElementById('canvas');
         let video  = document.getElementById('video');
-        video.setAttribute('src', data)
+        canvas.setAttribute('src', data)
     });
     function changeValue(number) {
         if(number === 0){
