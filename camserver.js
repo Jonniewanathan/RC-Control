@@ -1,13 +1,13 @@
 let http = require('http')
 let NodeWebcam = require( "node-webcam" );
-let io = require('socket.io')(http);
-
-let server = http.createServer();
-
-server.listen(9090, "127.0.0.1");
-
-let socket = io.listen(server);
-
+let io = require('socket.io')(9090,{
+    path: '/',
+        serveClient: false,
+        // below are engine.IO options
+        pingInterval: 10000,
+        pingTimeout: 5000,
+        cookie: false
+});
 let opts = {
     callbackReturn: "base64"
 };
