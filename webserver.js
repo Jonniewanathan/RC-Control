@@ -28,6 +28,7 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
     };
     NodeWebcam.capture("test_picture", opts, function(err, data) {
         socket.emit("video", data.data);
+        console.log(data.data);
     });
     let initialvalueleft = 1; //static variable for current status
     let initialvalueright = 1;
@@ -54,35 +55,3 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
         }
     });
 });
-
-
-//Default options
-// let opts = {
-//     //Picture related
-//     width: 1280,
-//     height: 720,
-//     quality: 100,
-//     //Delay in seconds to take shot
-//     //if the platform supports miliseconds
-//     //use a float (0.1)
-//     //Currently only on windows
-//     delay: 0,
-//     //Save shots in memory
-//     saveShots: false,
-//     // [jpeg, png] support varies
-//     // Webcam.OutputTypes
-//     output: "jpeg",
-//     //Which camera to use
-//     //Use Webcam.list() for results
-//     //false for default device
-//     device: false,
-//     // [location, buffer, base64]
-//     // Webcam.CallbackReturnTypes
-//     callbackReturn: "location",
-//     //Logging
-//     verbose: false
-// };
-// //Also available for quick use
-// NodeWebcam.capture("test_picture", opts, function(err, data) {
-// });
-//Return type with base 64 image
