@@ -2,7 +2,7 @@ let http = require('http').createServer(handler); //require http server, and cre
 let fs = require('fs'); //require filesystem module
 let io = require('socket.io')(http) //require socket.io module and pass the http object (server)
 let Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-let LED = new Gpio(4, 'out'); //use GPIO pin 4 as output
+let LED = new Gpio(23, 'out'); //use GPIO pin 4 as output
 let pushButton = new Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
 
 http.listen(8080); //listen to port 8080
