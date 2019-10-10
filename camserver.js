@@ -4,6 +4,8 @@ let io = require('socket.io')(9090);
 let opts = {
     callbackReturn: "base64"
 };
-NodeWebcam.capture("test_picture", opts, function (err, data) {
-    io.broadcast.emit("video", data);
-});
+io.on('connection', function (socket) {
+    NodeWebcam.capture("test_picture", opts, function (err, data) {
+        io.broadcast.emit("video", data);
+    });
+})
