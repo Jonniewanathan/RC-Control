@@ -17,14 +17,14 @@
             socket.emit("right", Number(this.checked)); //send button status to server (as 1 or 0)
         });
     });
-    socket.on('left', function (data) { //get button status from client
-        document.getElementById("left").checked = data; //change checkbox according to push button on Raspberry Pi
-        socket.emit("left", data); //send push button status to back to server
-    });
-    socket.on('right', function (data) { //get button status from client
-        document.getElementById("right").checked = data; //change checkbox according to push button on Raspberry Pi
-        socket.emit("right", data); //send push button status to back to server
-    });
+    // socket.on('left', function (data) { //get button status from client
+    //     document.getElementById("left").checked = data; //change checkbox according to push button on Raspberry Pi
+    //     socket.emit("left", data); //send push button status to back to server
+    // });
+    // socket.on('right', function (data) { //get button status from client
+    //     document.getElementById("right").checked = data; //change checkbox according to push button on Raspberry Pi
+    //     socket.emit("right", data); //send push button status to back to server
+    // });
 </script>
 </html>
 </body>
