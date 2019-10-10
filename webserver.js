@@ -40,9 +40,13 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
         }
         if (initialvalueright != forward.readSync()) {
             forward.writeSync(initialvalueforward);
+            right.writeSync(0);
+            right.writeSync(initialvalueright);
         }
         if (initialvalueright != reverse.readSync()) {
             reverse.writeSync(initialvaluereverse);
+            right.writeSync(0);
+            right.writeSync(initialvalueright);
         }
     });
 });
