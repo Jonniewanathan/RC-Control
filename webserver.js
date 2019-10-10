@@ -47,42 +47,42 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
             reverse.writeSync(initialvaluereverse);
         }
     });
-    let socket = io();
+});
 
+let socket = io();
 //Default options
-    let opts = {
-        //Picture related
-        width: 1280,
-        height: 720,
-        quality: 100,
-        //Delay in seconds to take shot
-        //if the platform supports miliseconds
-        //use a float (0.1)
-        //Currently only on windows
-        delay: 0,
-        //Save shots in memory
-        saveShots: false,
-        // [jpeg, png] support varies
-        // Webcam.OutputTypes
-        output: "jpeg",
-        //Which camera to use
-        //Use Webcam.list() for results
-        //false for default device
-        device: false,
-        // [location, buffer, base64]
-        // Webcam.CallbackReturnTypes
-        callbackReturn: "location",
-        //Logging
-        verbose: false
-    };
+let opts = {
+    //Picture related
+    width: 1280,
+    height: 720,
+    quality: 100,
+    //Delay in seconds to take shot
+    //if the platform supports miliseconds
+    //use a float (0.1)
+    //Currently only on windows
+    delay: 0,
+    //Save shots in memory
+    saveShots: false,
+    // [jpeg, png] support varies
+    // Webcam.OutputTypes
+    output: "jpeg",
+    //Which camera to use
+    //Use Webcam.list() for results
+    //false for default device
+    device: false,
+    // [location, buffer, base64]
+    // Webcam.CallbackReturnTypes
+    callbackReturn: "location",
+    //Logging
+    verbose: false
+};
 //Also available for quick use
-    NodeWebcam.capture("test_picture", opts, function(err, data) {
-    });
+NodeWebcam.capture("test_picture", opts, function(err, data) {
+});
 //Return type with base 64 image
-    let opts = {
-        callbackReturn: "base64"
-    };
-    NodeWebcam.capture("test_picture", opts, function(err, data) {
-        socket.emit("video", cam.toRGB());
-    });
+let opts = {
+    callbackReturn: "base64"
+};
+NodeWebcam.capture("test_picture", opts, function(err, data) {
+    socket.emit("video", cam.toRGB());
 });
