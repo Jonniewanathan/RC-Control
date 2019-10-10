@@ -60,6 +60,5 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
     cam.capture(function loop() {
         cam.capture(loop);
         socket.emit("video", cam.toRGB());
-        });
     });
 });
