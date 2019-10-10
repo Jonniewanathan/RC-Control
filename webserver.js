@@ -31,7 +31,7 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
         initialvalueleft = data.left;
         initialvalueright = data.right;
         initialvalueforward = data.forward;
-        initialvaluereverse = date.reverse;
+        initialvaluereverse = data.reverse;
         if (initialvalueleft != left.readSync()) {
             left.writeSync(initialvalueleft);
         }
