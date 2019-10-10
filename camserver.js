@@ -23,7 +23,10 @@ let opts = {
 
 io.sockets.on('connection', function (socket) {
     console.log("Connection Established")
-    NodeWebcam.capture("test_picture", opts, function (err, data) {
-        socket.emit("video", data);
-    });
+    while(true){
+        NodeWebcam.capture("test_picture", opts, function (err, data) {
+            socket.emit("video", data);
+        });
+    }
+
 })
