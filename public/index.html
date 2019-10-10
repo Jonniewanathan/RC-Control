@@ -10,6 +10,7 @@
     <source id="source" src="">
 </video>
 <canvas id="canvas"></canvas>
+<img src="" id="image" height="480" width="640">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
 <script>
     let socket = io(); //load socket.io-client and connect to the host that serves the page
@@ -42,6 +43,8 @@
         let canvas = document.getElementById('canvas');
         let video  = document.getElementById('video');
         let source = document.getElementById('source');
+        let image = document.getElementById('image');
+        image.setAttribute('src', data);
         source.setAttribute('src', data);
         video.play();
     });
