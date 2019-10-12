@@ -20,17 +20,21 @@
                 const data = canvas.toDataURL('image/png');
                 return data;
             };
-            navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}})
-                .then(function(stream) {
-                    console.log(stream);
-                    video.srcObject = stream;
-                    setInterval(() => {
-                        socket.emit("video", getFrame());
-                    }, 100);
-                })
-                .catch(function(err) {
-                    console.log("Didn't work");
-                });
+            navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
+            setInterval(() => {
+                socket.emit("video", getFrame());
+            }, 100);
+            // navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}})
+            //     .then(function(stream) {
+            //         console.log(stream);
+            //         video.srcObject = stream;
+            //         setInterval(() => {
+            //             socket.emit("video", getFrame());
+            //         }, 100);
+            //     })
+            //     .catch(function(err) {
+            //         console.log("Didn't work");
+            //     });
         });
 
     </script>
