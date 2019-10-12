@@ -18,7 +18,7 @@
             canvas.height = video.videoHeight;
             canvas.getContext('2d').drawImage(video, 0, 0);
             // const data = canvas.toDataURL('image/png');
-            let data = canvas.getBase64();
+            let data = canvas.toDataURL();
             return data;
         };
 
