@@ -18,6 +18,7 @@
                 canvas.height = video.videoHeight;
                 canvas.getContext('2d').drawImage(video, 0, 0);
                 const data = canvas.toDataURL('image/png');
+                console.log(data);
                 return data;
             };
             navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
