@@ -10,8 +10,6 @@
     <script>
         let socket = io();
         const video = document.getElementById('video');
-
-        console.log("Connection Established");
         const getFrame = () => {
             const canvas = document.createElement('canvas');
             canvas.width = video.videoWidth;
@@ -19,6 +17,7 @@
             canvas.getContext('2d').drawImage(video, 0, 0);
             // const data = canvas.toDataURL('image/png');
             let data = canvas.toDataURL();
+            console.log(data);
             return data;
         };
 
