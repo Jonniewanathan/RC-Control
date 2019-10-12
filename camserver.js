@@ -3,6 +3,7 @@ let fs = require('fs'); //require filesystem module
 let io = require('socket.io')(http) //require socket.io module and pass the http object (server)
 let NodeWebcam = require( "node-webcam" );
 
+
 http.listen(9090); //listen to port 8080
 
 function handler (req, res) { //create server
@@ -22,17 +23,29 @@ let opts = {
 };
 
 io.sockets.on('connection', function (socket) {
-    console.log("Connection Established")
-    NodeWebcam.capture("test_picture", opts, function (err, data) {
-        socket.emit("video", data);
-    });
-    while(true){
-        sleep(1000);
-        NodeWebcam.capture("test_picture", opts, function (err, data) {
+    console.log("Connection Established");
+    // NodeWebcam.capture("test_picture", opts, function (err, data) {
+    //     socket.emit("video", data);
+    // });
+    // while(true){
+    //     sleep(1000);
+    //     NodeWebcam.capture("test_picture", opts, function (err, data) {
+    //         socket.emit("video", data);
+    //     });
+    // }
+    // navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}}).then((stream) => video.srcObject = stream);
+    navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}})
+        .then(function(stream) {
+            console.log(stream);
+            let data;
+            data = stream.getVideoTracks();
+            console.log(data);
             socket.emit("video", data);
+        })
+        .catch(function(err) {
+            /* handle the error */
         });
-    }
-})
+});
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
