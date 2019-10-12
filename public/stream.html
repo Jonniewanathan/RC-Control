@@ -3,10 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
 </head>
 <body>
     <video autoplay></video>
     <script>
+        let socket = io();
+        const video = document.querySelector('video');
+        socket.on('connection', function (socket) {
+            console.log("Connection Established");
+            const getFrame = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                canvas.getContext('2d').drawImage(video, 0, 0);
+                const data = canvas.toDataURL('image/png');
+                return data;
+            };
+            navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}})
+                .then(function(stream) {
+                    console.log(stream);
+                    video.srcObject = stream;
+                    setInterval(() => {
+                        socket.emit("video", getFrame());
+                    }, 100);
+                })
+                .catch(function(err) {
+                    console.log("Didn't work");
+                });
+        });
 
     </script>
 </body>

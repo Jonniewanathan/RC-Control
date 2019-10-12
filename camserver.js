@@ -7,7 +7,7 @@ let NodeWebcam = require( "node-webcam" );
 http.listen(9090); //listen to port 8080
 
 function handler (req, res) { //create server
-    fs.readFile(__dirname + '/public/index.html', function(err, data) { //read file index.html in public folder
+    fs.readFile(__dirname + '/public/stream.html', function(err, data) { //read file index.html in public folder
         if (err) {
             res.writeHead(404, {'Content-Type': 'text/html'}); //display 404 on error
             return res.end("404 Not Found");
@@ -33,18 +33,7 @@ io.sockets.on('connection', function (socket) {
     //         socket.emit("video", data);
     //     });
     // }
-    // navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}}).then((stream) => video.srcObject = stream);
-    navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}})
-        .then(function(stream) {
-            console.log(stream);
-            let data;
-            data = stream.getVideoTracks();
-            console.log(data);
-            socket.emit("video", data);
-        })
-        .catch(function(err) {
-            /* handle the error */
-        });
+
 });
 
 function sleep(ms) {
