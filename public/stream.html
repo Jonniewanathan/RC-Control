@@ -21,7 +21,11 @@
             console.log(data);
             return data;
         };
-        navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}}).then((stream) => video.srcObject = stream);
+        //navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}}).then((stream) => video.srcObject = stream);
+        navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}}, (stream) =>{
+            console.log("Got Camera");
+            video.srcObject = stream;
+        });
         setInterval(() => {
             socket.emit("video", getFrame());
         }, 100);
