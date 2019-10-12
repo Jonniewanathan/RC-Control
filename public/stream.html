@@ -10,33 +10,22 @@
     <script>
         let socket = io();
         const video = document.querySelector('video');
-        socket.on('connection', function (socket) {
-            console.log("Connection Established");
-            const getFrame = () => {
-                const canvas = document.createElement('canvas');
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                canvas.getContext('2d').drawImage(video, 0, 0);
-                const data = canvas.toDataURL('image/png');
-                console.log(data);
-                return data;
-            };
-            navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
-            setInterval(() => {
-                socket.emit("video", getFrame());
-            }, 100);
-            // navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}})
-            //     .then(function(stream) {
-            //         console.log(stream);
-            //         video.srcObject = stream;
-            //         setInterval(() => {
-            //             socket.emit("video", getFrame());
-            //         }, 100);
-            //     })
-            //     .catch(function(err) {
-            //         console.log("Didn't work");
-            //     });
-        });
+
+        console.log("Connection Established");
+        const getFrame = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            const data = canvas.toDataURL('image/png');
+            console.log(data);
+            return data;
+        };
+        navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
+        setInterval(() => {
+            socket.emit("video", getFrame());
+        }, 100);
+
 
     </script>
 </body>
