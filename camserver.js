@@ -22,7 +22,7 @@ let opts = {
     width: 480,
     height: 360,
     quality: 100,
-    callbackReturn: "buffer"
+    callbackReturn: "base64"
 };
 
 io.sockets.on('connection', function (socket) {
@@ -37,7 +37,7 @@ io.sockets.on('connection', function (socket) {
         NodeWebcam.capture("test_picture", opts, function (err, data) {
             socket.emit("video", data);
         });
-    }, 100);
+    }, 500);
 
 
 });
