@@ -19,6 +19,9 @@ function handler (req, res) { //create server
 }
 
 let opts = {
+    width: 480,
+    height: 320,
+    quality: 100,
     callbackReturn: "base64"
 };
 
