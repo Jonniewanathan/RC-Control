@@ -6,10 +6,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
 </head>
 <body>
-    <video autoplay></video>
+    <video id="video" autoplay></video>
     <script>
         let socket = io();
-        const video = document.querySelector('video');
+        const video = document.getElementById('video');
 
         console.log("Connection Established");
         const getFrame = () => {
@@ -21,25 +21,20 @@
             console.log(data);
             return data;
         };
-        moz.navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
-            function(stream) {
+
+        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Not adding `{ audio: true }` since we only want video now
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                //video.src = window.URL.createObjectURL(stream);
                 video.srcObject = stream;
-                video.onloadedmetadata = function(e) {
-                    video.play();
-                };
-            },
-            function(err) {
-                console.log("The following error occurred: " + err.name);
-            }
-        );
-        //navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}}).then((stream) => video.srcObject = stream);
-        // navigator.getUserMedia({video: {width: 640, height: 480}}, (stream) =>{
-        //     console.log("Got Camera");
-        //     video.srcObject = stream;
-        // });
+                video.play();
+            });
+        }
         setInterval(() => {
             socket.emit("video", getFrame());
         }, 100);
+        // });
+
 
 
     </script>
