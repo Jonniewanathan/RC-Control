@@ -34,7 +34,7 @@ io.sockets.on('connection', function (socket) {
         NodeWebcam.capture("test_picture", opts, function (err, data) {
             socket.emit("video", data);
         });
-    }, 100);
+    }, 1000);
 
 
 });
