@@ -22,7 +22,7 @@ let opts = {
     width: 480,
     height: 360,
     quality: 100,
-    callbackReturn: "base64"
+    callbackReturn: "location"
 };
 
 io.sockets.on('connection', function (socket) {
