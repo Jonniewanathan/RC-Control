@@ -39,10 +39,7 @@
         let canvas = document.getElementById('image');
         let context = canvas.getContext("2d");
         console.log(data);
-        data = data.split(',');
-        console.log(data[1]);
-        context.drawImage(data[1],0,0);
-        canvas.setAttribute('src', data);
+        context.drawImage(data,0,0);
     });
 
     function changeValue(number) {
