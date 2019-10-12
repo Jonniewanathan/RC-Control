@@ -6,7 +6,6 @@
 <p>RIGHT: <button type="button" id="right">RIGHT</button></p>
 <p>FORWARD: <button type="button" id="forward">FORWARD</button></p>
 <p>REVERSE: <button type="button" id="reverse">REVERSE</button></p>
-<img src="" width="540" height="480" id="image">
 <canvas src="" id="canvas" height="480" width="640"></canvas>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
 <script>
@@ -35,11 +34,10 @@
             socket.emit("movement", value); //send button status to server (as 1 or 0)
         });
     });
-
+    const img = new Image();
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext("2d");
     socketvideo.on('video', function (data) {
-        let canvas = document.getElementById('canvas');
-        let context = canvas.getContext("2d");
-        const img = new Image();
         img.src = data;
         img.onload = () => {
             context.drawImage(img, 0, 0);
