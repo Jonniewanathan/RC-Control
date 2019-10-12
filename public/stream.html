@@ -29,6 +29,9 @@
                 video.play();
             });
         }
+        else{
+            console.log("No Camera");
+        }
         setInterval(() => {
             socket.emit("video", getFrame());
         }, 100);
