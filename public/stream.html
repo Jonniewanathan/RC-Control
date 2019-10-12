@@ -21,11 +21,22 @@
             console.log(data);
             return data;
         };
+        navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
+            function(stream) {
+                video.srcObject = stream;
+                video.onloadedmetadata = function(e) {
+                    video.play();
+                };
+            },
+            function(err) {
+                console.log("The following error occurred: " + err.name);
+            }
+        );
         //navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}}).then((stream) => video.srcObject = stream);
-        navigator.mediaDevices.getUserMedia({video: {width: 640, height: 480}}, (stream) =>{
-            console.log("Got Camera");
-            video.srcObject = stream;
-        });
+        // navigator.getUserMedia({video: {width: 640, height: 480}}, (stream) =>{
+        //     console.log("Got Camera");
+        //     video.srcObject = stream;
+        // });
         setInterval(() => {
             socket.emit("video", getFrame());
         }, 100);
