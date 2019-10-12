@@ -21,7 +21,7 @@
             console.log(data);
             return data;
         };
-        navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
+        moz.navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
             function(stream) {
                 video.srcObject = stream;
                 video.onloadedmetadata = function(e) {
