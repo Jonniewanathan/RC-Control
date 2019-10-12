@@ -37,6 +37,7 @@
 
     socketvideo.on('video', function (data) {
         let image = document.getElementById('image');
+        console.log(image);
         image.setAttribute('src', data);
     });
 
