@@ -28,11 +28,11 @@ const webcam_server = new LiveCam
 
         // should width of the frame be resized (default : 0)
         // provide 0 to match webcam input
-        'width' : 640,
+        'width' : 800,
 
         // should height of the frame be resized (default : 0)
         // provide 0 to match webcam input
-        'height' : 480,
+        'height' : 600,
 
         // should a fake source be used instead of an actual webcam
         // suitable for debugging and development (default : false)
@@ -45,5 +45,6 @@ const webcam_server = new LiveCam
         // macos only: select the webcam via index
         'deviceIndex' : 1
     }
+});
 
 webcam_server.broadcast();
