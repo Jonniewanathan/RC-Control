@@ -2,7 +2,6 @@ let http = require('http').createServer(handler); //require http server, and cre
 let fs = require('fs'); //require filesystem module
 let io = require('socket.io')(http) //require socket.io module and pass the http object (server)
 let Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-let NodeWebcam = require( "node-webcam" );
 let left = new Gpio(23, 'out');
 let right = new Gpio(27, 'out');
 let forward = new Gpio(17, 'out');
