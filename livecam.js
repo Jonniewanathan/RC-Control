@@ -24,11 +24,11 @@ const webcam_server = new LiveCam
 
         // should width of the frame be resized (default : 0)
         // provide 0 to match webcam input
-        'width' : 800,
+        'width' : 640,
 
         // should height of the frame be resized (default : 0)
         // provide 0 to match webcam input
-        'height' : 600,
+        'height' : 480,
 
         // should a fake source be used instead of an actual webcam
         // suitable for debugging and development (default : false)
